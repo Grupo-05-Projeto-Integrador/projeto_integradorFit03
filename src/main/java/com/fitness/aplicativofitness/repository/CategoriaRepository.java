@@ -4,12 +4,10 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.fitness.aplicativofitness.model.Categorias;
+import com.fitness.aplicativofitness.model.Categoria;
 
-public interface CategoriaRepository extends JpaRepository<Categorias, Long> {
-		
-		public List<Categorias> findAllByDescricaoContainingIgnoreCase(String descricao);
+public interface CategoriaRepository  extends JpaRepository<Categoria, Long> {
+	
+   public List<Categoria> findAllByTipoContainingIgnoreCase(String tipo);
 
-
-	}
-
+}

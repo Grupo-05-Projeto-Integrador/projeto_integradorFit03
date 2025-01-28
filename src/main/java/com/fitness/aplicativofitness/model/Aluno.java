@@ -1,46 +1,40 @@
 package com.fitness.aplicativofitness.model;
 
-import java.util.List;
-
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
+
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "tb_usuarios")
-public class Usuario {
-	
+@Table(name = "tb_alunos")
+public class Aluno {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
-	@NotNull(message = "O Atributo Nome é Obrigatório!")
+
+	@NotNull(message = "O atributo Nome é obrigatório!")
 	private String nome;
-	
-	@NotNull(message = "O Atributo Nome é Obrigatório!")
+
+	@NotNull(message = "O atributo Email é obrigatório!")
 	private String email;
-	
+
 	@Column(nullable = false)
 	private Double altura;
-	
+
 	@Column(nullable = false)
 	private Double peso;
-	
+
 	@Column
 	private Double imc;
-	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario", cascade = CascadeType.REMOVE)
-	@JsonIgnoreProperties("usuario")
-	private List<Postagem> postagem;
+
+	@Column
+	private String categoriaImc; // Novo atributo para armazenar a categoria do IMC...
 
 	public Long getId() {
 		return id;
@@ -81,8 +75,6 @@ public class Usuario {
 	public void setPeso(Double peso) {
 		this.peso = peso;
 	}
-	
-	
 
 	public Double getImc() {
 		return imc;
@@ -92,14 +84,12 @@ public class Usuario {
 		this.imc = imc;
 	}
 
-	public List<Postagem> getPostagem() {
-		return postagem;
+	public String getCategoriaImc() {
+		return categoriaImc;
 	}
 
-	public void setPostagem(List<Postagem> postagem) {
-		this.postagem = postagem;
+	public void setCategoriaImc(String categoriaImc) {
+		this.categoriaImc = categoriaImc;
 	}
-	
-	
 
 }
