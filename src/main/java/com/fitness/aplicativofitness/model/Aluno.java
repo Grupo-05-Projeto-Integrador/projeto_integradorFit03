@@ -34,7 +34,7 @@ public class Aluno {
 	private Double imc;
 
 	@Column
-	private String categoriaImc; // Novo atributo para armazenar a categoria do IMC
+	private String categoriaImc; // Novo atributo para armazenar a categoria do IMC...
 
 	public Long getId() {
 		return id;
