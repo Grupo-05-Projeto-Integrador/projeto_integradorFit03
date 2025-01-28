@@ -1,12 +1,17 @@
 package com.fitness.aplicativofitness.model;
 
 
-import jakarta.persistence.Entity;
+import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 
@@ -21,6 +26,11 @@ public class Categoria {
 		
 		@NotNull(message = "O Atributo Descrição é obrigatorio") //NÃO DEIXA O CAMPO SER NULO
 		private String tipo;
+		
+		@OneToMany(fetch = FetchType.LAZY, mappedBy = "categorias", cascade = CascadeType.REMOVE)
+		@JsonIgnoreProperties("categorias")
+		private List<Exercicio> exercicio;
+
 
 		public Long getId() {
 			return id;
@@ -36,6 +46,14 @@ public class Categoria {
 
 		public void setTipo(String tipo) {
 			this.tipo = tipo;
+		}
+
+		public List<Exercicio> getExercicio() {
+			return exercicio;
+		}
+
+		public void setExercicio(List<Exercicio> exercicio) {
+			this.exercicio = exercicio;
 		}
 		
 
