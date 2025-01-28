@@ -1,12 +1,17 @@
 package com.fitness.aplicativofitness.model;
 
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 
@@ -34,7 +39,20 @@ public class Aluno {
 	private Double imc;
 
 	@Column
-	private String categoriaImc; // Novo atributo para armazenar a categoria do IMC...
+	private String categoriaImc; // Novo atributo para armazenar a categoria do IMC
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "Exercicio", cascade = CascadeType.REMOVE)
+	@JsonIgnoreProperties("exercicio")
+	private List<Exercicio> exercicio;
+
+
+	public List<Exercicio> getExercicio() {
+		return exercicio;
+	}
+
+	public void setExercicio(List<Exercicio> exercicio) {
+		this.exercicio = exercicio;
+	}
 
 	public Long getId() {
 		return id;
@@ -91,5 +109,7 @@ public class Aluno {
 	public void setCategoriaImc(String categoriaImc) {
 		this.categoriaImc = categoriaImc;
 	}
+	
+	
 
 }
