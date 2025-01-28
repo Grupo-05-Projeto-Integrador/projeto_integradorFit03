@@ -1,9 +1,12 @@
 package com.fitness.aplicativofitness.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -30,6 +33,14 @@ public class Exercicio {
 	@NotBlank(message = "O atributo 'Descrição' é obrigatório!")
 	@Size(min = 5, max = 100, message = "A Descrição precisa conter no mínimo 5 e no máximo 100 caracteres")
 	private String descricao;
+	
+	@ManyToOne
+	@JsonIgnoreProperties("exercicio")
+	private Aluno aluno;
+	
+	@ManyToOne
+	@JsonIgnoreProperties("exercicio")
+	private Categoria categoria;
 
 	public Long getId() {
 		return id;
@@ -71,4 +82,19 @@ public class Exercicio {
 		this.descricao = descricao;
 	}
 
+	public Aluno getAluno() {
+		return aluno;
+	}
+
+	public void setAluno(Aluno aluno) {
+		this.aluno = aluno;
+	}
+
+	public Categoria getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
+	}
 }
