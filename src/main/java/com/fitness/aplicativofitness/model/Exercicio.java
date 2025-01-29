@@ -41,6 +41,10 @@ public class Exercicio {
 	@ManyToOne
 	@JsonIgnoreProperties("exercicio")
 	private Categoria categoria;
+	
+	@ManyToOne
+	@JsonIgnoreProperties("exercicio")
+	private Usuario usuario;
 
 	public Long getId() {
 		return id;
