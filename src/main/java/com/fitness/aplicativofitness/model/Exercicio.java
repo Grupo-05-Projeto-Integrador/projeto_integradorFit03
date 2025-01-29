@@ -1,7 +1,6 @@
 package com.fitness.aplicativofitness.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.generation.blogpessoal.model.Usuario;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

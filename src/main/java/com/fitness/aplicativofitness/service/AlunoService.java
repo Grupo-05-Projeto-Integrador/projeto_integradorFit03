@@ -12,9 +12,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.fitness.aplicativofitness.model.Aluno;
+import com.fitness.aplicativofitness.model.AlunoLogin;
 import com.fitness.aplicativofitness.repository.AlunoRepository;
 import com.fitness.aplicativofitness.security.JwtService;
-import com.generation.blogpessoal.model.UsuarioLogin;
 
 @Service
 public class AlunoService {
@@ -48,7 +48,7 @@ public class AlunoService {
         return Optional.empty();
     }
 
-    public Optional<UsuarioLogin> autenticarAluno(Optional<UsuarioLogin> usuarioLogin) {
+    public Optional<AlunoLogin> autenticarAluno(Optional<AlunoLogin> usuarioLogin) {
         var credenciais = new UsernamePasswordAuthenticationToken(usuarioLogin.get().getUsuario(), usuarioLogin.get().getSenha());
         Authentication authentication = authenticationManager.authenticate(credenciais);
         if (authentication.isAuthenticated()) {
