@@ -6,6 +6,8 @@ import java.util.List;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.fitness.aplicativofitness.model.Usuario;
+
 public class UserDetailsImpl implements UserDetails {
 
 	private static final long serialVersionUID = 1L;
