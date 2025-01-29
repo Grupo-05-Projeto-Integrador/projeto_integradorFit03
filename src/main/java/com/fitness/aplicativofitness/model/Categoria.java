@@ -24,7 +24,7 @@ public class Categoria {
 		@GeneratedValue (strategy = GenerationType.IDENTITY) //AUTOICRMENT
 		private Long id;
 		
-		@NotNull(message = "O Atributo Descrição é obrigatorio") //NÃO DEIXA O CAMPO SER NULO
+		@NotNull(message = "O Atributo Categoria é obrigatorio") //NÃO DEIXA O CAMPO SER NULO
 		private String tipo;
 		
 		@OneToMany(fetch = FetchType.LAZY, mappedBy = "categoria", cascade = CascadeType.REMOVE)

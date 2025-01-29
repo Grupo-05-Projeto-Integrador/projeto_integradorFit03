@@ -73,6 +73,7 @@ public class Exercicio {
 	public void setSerie(Integer serie) {
 		this.serie = serie;
 	}
+	
 
 	public String getDescricao() {
 		return descricao;
