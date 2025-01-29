@@ -41,8 +41,8 @@ public class Aluno {
 	@Column
 	private String categoriaImc; // Novo atributo para armazenar a categoria do IMC
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "Exercicio", cascade = CascadeType.REMOVE)
-	@JsonIgnoreProperties("exercicio")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "aluno", cascade = CascadeType.REMOVE)
+	@JsonIgnoreProperties("aluno")
 	private List<Exercicio> exercicio;
 
 
