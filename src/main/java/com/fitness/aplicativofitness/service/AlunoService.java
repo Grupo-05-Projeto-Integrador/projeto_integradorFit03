@@ -3,67 +3,17 @@ package com.fitness.aplicativofitness.service;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
 import com.fitness.aplicativofitness.model.Aluno;
-import com.fitness.aplicativofitness.model.AlunoLogin;
 import com.fitness.aplicativofitness.repository.AlunoRepository;
-import com.fitness.aplicativofitness.security.JwtService;
 
 @Service
 public class AlunoService {
 
     @Autowired
     private AlunoRepository alunoRepository;
-
-    @Autowired
-    private JwtService jwtService;
-
-    @Autowired
-    private AuthenticationManager authenticationManager;
-
-    public Optional<Aluno> cadastrarAluno(Aluno aluno) {
-        if (alunoRepository.findByUsuario(aluno.getUsuario()).isPresent()) {
-            return Optional.empty();
-        }
-        aluno.setSenha(criptografarSenha(aluno.getSenha()));
-        return Optional.of(alunoRepository.save(aluno));
-    }
-
-    public Optional<Aluno> atualizarAluno(Aluno aluno) {
-        if (alunoRepository.findById(aluno.getId()).isPresent()) {
-            Optional<Aluno> buscaAluno = alunoRepository.findByUsuario(aluno.getUsuario());
-            if ((buscaAluno.isPresent()) && (buscaAluno.get().getId() != aluno.getId())) {
-                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Usuário já existe!", null);
-            }
-            aluno.setSenha(criptografarSenha(aluno.getSenha()));
-            return Optional.of(alunoRepository.save(aluno));
-        }
-        return Optional.empty();
-    }
-
-    public Optional<AlunoLogin> autenticarAluno(Optional<AlunoLogin> usuarioLogin) {
-        var credenciais = new UsernamePasswordAuthenticationToken(usuarioLogin.get().getUsuario(), usuarioLogin.get().getSenha());
-        Authentication authentication = authenticationManager.authenticate(credenciais);
-        if (authentication.isAuthenticated()) {
-            Optional<Aluno> aluno = alunoRepository.findByUsuario(usuarioLogin.get().getUsuario());
-            if (aluno.isPresent()) {
-                usuarioLogin.get().setId(aluno.get().getId());
-                usuarioLogin.get().setNome(aluno.get().getNome());
-                usuarioLogin.get().setFoto(aluno.get().getFoto());
-                usuarioLogin.get().setToken(gerarToken(usuarioLogin.get().getUsuario()));
-                usuarioLogin.get().setSenha("");
-                return usuarioLogin;
-            }
-        }
-        return Optional.empty();
-    }
+  
 
     public Optional<Aluno> calcularImc(Long id) {
         return alunoRepository.findById(id).map(aluno -> {
@@ -94,12 +44,5 @@ public class AlunoService {
         }
     }
 
-    private String criptografarSenha(String senha) {
-        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        return encoder.encode(senha);
-    }
-
-    private String gerarToken(String usuario) {
-        return "Bearer " + jwtService.generateToken(usuario);
-    }
+   
 }
