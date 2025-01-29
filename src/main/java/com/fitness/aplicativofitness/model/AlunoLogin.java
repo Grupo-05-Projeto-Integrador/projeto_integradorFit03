@@ -1,6 +1,6 @@
 package com.fitness.aplicativofitness.model;
 
-public class UsuarioLogin {
+public class AlunoLogin {
 	
 	private Long id;
 	private String nome;

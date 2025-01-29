@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.fitness.aplicativofitness.model.Usuario;
+import com.fitness.aplicativofitness.model.Aluno;
 
 public class UserDetailsImpl implements UserDetails {
 
@@ -16,7 +16,7 @@ public class UserDetailsImpl implements UserDetails {
 	private String password;
 	private List<GrantedAuthority> authorities;
 
-	public UserDetailsImpl(Usuario user) {
+	public UserDetailsImpl(Aluno user) {
 		this.userName = user.getUsuario();
 		this.password = user.getSenha();
 	}

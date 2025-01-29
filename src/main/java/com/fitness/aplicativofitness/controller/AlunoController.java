@@ -79,6 +79,18 @@ public class AlunoController {
 
 		return ResponseEntity.ok(alunos);
 	}
+	
+	@GetMapping("/usuario/{usuario}")
+	public ResponseEntity<Optional<Aluno>> getByUsuario(@PathVariable String usuario) {
+		/*List<Aluno> alunos = alunoRepository.findByUsuario(usuario);*/
+		Optional<Aluno> alunos= alunoRepository.findByUsuario(usuario);
+		
+		if (alunos.isEmpty()) {
+			return ResponseEntity.noContent().build();
+		}
+		
+		return ResponseEntity.ok(alunos);
+	}
 
 	/**
 	 * Calcula e retorna o IMC e a categoria de um aluno pelo ID.

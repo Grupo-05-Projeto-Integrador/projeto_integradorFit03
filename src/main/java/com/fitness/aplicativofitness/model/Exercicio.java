@@ -1,6 +1,7 @@
 package com.fitness.aplicativofitness.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.generation.blogpessoal.model.Usuario;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -34,9 +35,6 @@ public class Exercicio {
 	@Size(min = 5, max = 100, message = "A Descrição precisa conter no mínimo 5 e no máximo 100 caracteres")
 	private String descricao;
 	
-	@ManyToOne
-	@JsonIgnoreProperties("exercicio")
-	private Aluno aluno;
 	
 	@ManyToOne
 	@JsonIgnoreProperties("exercicio")
@@ -44,7 +42,7 @@ public class Exercicio {
 	
 	@ManyToOne
 	@JsonIgnoreProperties("exercicio")
-	private Usuario usuario;
+	private Aluno aluno;
 
 	public Long getId() {
 		return id;

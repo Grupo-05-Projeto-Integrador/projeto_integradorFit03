@@ -12,22 +12,22 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.fitness.aplicativofitness.model.Usuario;
-import com.fitness.aplicativofitness.repository.UsuarioRepository;
+import com.fitness.aplicativofitness.model.Aluno;
+import com.fitness.aplicativofitness.repository.AlunoRepository;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
 	@Autowired
-	private UsuarioRepository usuarioRepository;
+	private AlunoRepository alunoRepository;
 
 
 	public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
 
-		Optional<Usuario> usuario = usuarioRepository.findByUsuario(userName);
+		Optional<Aluno> aluno = alunoRepository.findByUsuario(userName);
 
-		if (usuario.isPresent())
-			return new UserDetailsImpl(usuario.get());
+		if (aluno.isPresent())
+			return new UserDetailsImpl(aluno.get());
 		else
 			throw new ResponseStatusException(HttpStatus.FORBIDDEN);
 			
